@@ -16,8 +16,7 @@ Automates filling out and submitting a student registration form on the Tutorial
 - Submits the form and asserts all fields were filled correctly
 
 ### Recorded Video - Task 1
-<!-- Add your recorded video link below -->
-[Task 1 Video](YOUR_VIDEO_LINK_HERE)
+[Task 1 Video](https://drive.google.com/file/d/1Z_q-8qpK0gpmDZ1UtzO9iU95OnQXZoz0/view?usp=drive_link)
 
 ### Test Report Screenshot - Task 1
 <!-- Add your report screenshot below -->
@@ -37,8 +36,7 @@ Scrapes stock price data from the Dhaka Stock Exchange (DSE) website and stores 
 - Asserts that data rows were successfully scraped
 
 ### Recorded Video - Task 2
-<!-- Add your recorded video link below -->
-[Task 2 Video](YOUR_VIDEO_LINK_HERE)
+[Task 2 Video](https://drive.google.com/file/d/13RlqShaBXgITQzaOJhzdxBOeRuH7wz8G/view?usp=drive_link)
 
 ### Test Report Screenshot - Task 2
 <!-- Add your report screenshot below -->

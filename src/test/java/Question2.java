@@ -18,18 +18,20 @@ public class Question2 {
     WebDriver driver;
 
     @BeforeAll
-    void setup() {
+    void setup() throws Exception {
+        // Minimize all windows first
+        new ProcessBuilder("powershell", "-command",
+                "(New-Object -ComObject Shell.Application).MinimizeAll()")
+                .start().waitFor();
+        Thread.sleep(1000);
+
+        // Now open Chrome - it will be the only visible window
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
-    @AfterAll
-    void teardown() {
-        if (driver != null) {
-            driver.quit();
-        }
-    }
+    // Browser stays open after test completes for recording
 
     void takeScreenshot(String fileName) throws IOException {
         File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
@@ -46,7 +48,11 @@ public class Question2 {
         driver.get("https://dsebd.org/latest_share_price_scroll_by_value.php");
 
         // Wait for page to fully load
-        Thread.sleep(8000);
+        Thread.sleep(10000);
+
+        // Scroll down to show the table
+        ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, 300);");
+        Thread.sleep(2000);
 
         // Use JavaScript to extract all table data at once to avoid StaleElementException
         String script = """
@@ -76,9 +82,16 @@ public class Question2 {
                 """;
 
         String tableData = (String) ((JavascriptExecutor) driver).executeScript(script);
+        Thread.sleep(2000);
 
         // Step 1: Print all cell values
         System.out.println(tableData);
+
+        // Scroll through the table to show data visually
+        ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, 600);");
+        Thread.sleep(2000);
+        ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, 1200);");
+        Thread.sleep(2000);
 
         // Step 2: Store the values in a text file
         String filePath = System.getProperty("user.dir") + "/dse_table_data.txt";
@@ -92,11 +105,15 @@ public class Question2 {
 
         System.out.println("Total data rows scraped: " + dataRows);
         System.out.println("Data saved to: " + filePath);
+        Thread.sleep(2000);
 
         // Assert that data was scraped
         Assertions.assertTrue(dataRows > 0, "Table should have data rows");
 
         // Take screenshot of the scraped page
         takeScreenshot("question2_result.png");
+
+        // Open the text file to show the saved data
+        java.awt.Desktop.getDesktop().open(new File(filePath));
     }
 }
