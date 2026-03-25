@@ -1,0 +1,21 @@
+# Gradle
+.gradle/
+gradle/
+gradlew
+gradlew.bat
+
+# Build output
+build/
+
+# IDE
+.idea/
+
+# Logs
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Generated data
+dse_table_data.txt
